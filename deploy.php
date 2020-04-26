@@ -31,7 +31,8 @@ if (file_exists(basename(__FILE__, '.php').'-config.php')) {
  *
  * @var string
  */
-if (!defined('SECRET_ACCESS_TOKEN')) define('SECRET_ACCESS_TOKEN', 'BetterChangeMeNowOrSufferTheConsequences');
+if (!defined('SECRET_ACCESS_TOKEN'))
+    define('SECRET_ACCESS_TOKEN', 'BetterChangeMeNowOrSufferTheConsequences');
 
 /**
  * The address of the remote Git repository that contains the code that's being
@@ -40,7 +41,8 @@ if (!defined('SECRET_ACCESS_TOKEN')) define('SECRET_ACCESS_TOKEN', 'BetterChange
  *
  * @var string
  */
-if (!defined('REMOTE_REPOSITORY')) define('REMOTE_REPOSITORY', 'https://github.com/markomarkovic/simple-php-git-deploy.git');
+if (!defined('REMOTE_REPOSITORY'))
+    define('REMOTE_REPOSITORY', 'https://github.com/markomarkovic/simple-php-git-deploy.git');
 
 /**
  * The branch that's being deployed.
@@ -48,7 +50,8 @@ if (!defined('REMOTE_REPOSITORY')) define('REMOTE_REPOSITORY', 'https://github.c
  *
  * @var string
  */
-if (!defined('BRANCH')) define('BRANCH', 'master');
+if (!defined('BRANCH'))
+    define('BRANCH', 'master');
 
 /**
  * The location that the code is going to be deployed to.
@@ -56,7 +59,8 @@ if (!defined('BRANCH')) define('BRANCH', 'master');
  *
  * @var string Full path including the trailing slash
  */
-if (!defined('TARGET_DIR')) define('TARGET_DIR', '/tmp/simple-php-git-deploy/');
+if (!defined('TARGET_DIR'))
+    define('TARGET_DIR', '/tmp/simple-php-git-deploy/');
 
 /**
  * Whether to delete the files that are not in the repository but are on the
@@ -69,7 +73,8 @@ if (!defined('TARGET_DIR')) define('TARGET_DIR', '/tmp/simple-php-git-deploy/');
  *
  * @var boolean
  */
-if (!defined('DELETE_FILES')) define('DELETE_FILES', false);
+if (!defined('DELETE_FILES'))
+    define('DELETE_FILES', false);
 
 /**
  * The directories and files that are to be excluded when updating the code.
@@ -79,9 +84,10 @@ if (!defined('DELETE_FILES')) define('DELETE_FILES', false);
  *
  * @var serialized array of strings
  */
-if (!defined('EXCLUDE')) define('EXCLUDE', serialize(array(
-	'.git',
-)));
+if (!defined('EXCLUDE'))
+    define('EXCLUDE', serialize(array(
+        '.git',
+    )));
 
 /**
  * Temporary directory we'll use to stage the code before the update. If it
@@ -91,28 +97,32 @@ if (!defined('EXCLUDE')) define('EXCLUDE', serialize(array(
  *
  * @var string Full path including the trailing slash
  */
-if (!defined('TMP_DIR')) define('TMP_DIR', '/tmp/spgd-'.md5(REMOTE_REPOSITORY).'/');
+if (!defined('TMP_DIR'))
+    define('TMP_DIR', '/tmp/spgd-'.md5(REMOTE_REPOSITORY).'/');
 
 /**
  * Whether to remove the TMP_DIR after the deployment.
  * It's useful NOT to clean up in order to only fetch changes on the next
  * deployment.
  */
-if (!defined('CLEAN_UP')) define('CLEAN_UP', true);
+if (!defined('CLEAN_UP'))
+    define('CLEAN_UP', true);
 
 /**
  * Output the version of the deployed code.
  *
  * @var string Full path to the file name
  */
-if (!defined('VERSION_FILE')) define('VERSION_FILE', TMP_DIR.'VERSION');
+if (!defined('VERSION_FILE'))
+    define('VERSION_FILE', TMP_DIR.'VERSION');
 
 /**
  * Time limit for each command.
  *
  * @var int Time in seconds
  */
-if (!defined('TIME_LIMIT')) define('TIME_LIMIT', 30);
+if (!defined('TIME_LIMIT'))
+    define('TIME_LIMIT', 30);
 
 /**
  * OPTIONAL
@@ -120,7 +130,8 @@ if (!defined('TIME_LIMIT')) define('TIME_LIMIT', 30);
  *
  * @var string Full backup directory path e.g. `/tmp/`
  */
-if (!defined('BACKUP_DIR')) define('BACKUP_DIR', false);
+if (!defined('BACKUP_DIR'))
+    define('BACKUP_DIR', false);
 
 /**
  * OPTIONAL
@@ -131,7 +142,8 @@ if (!defined('BACKUP_DIR')) define('BACKUP_DIR', false);
  * @var boolean Whether to use composer or not
  * @link http://getcomposer.org/
  */
-if (!defined('USE_COMPOSER')) define('USE_COMPOSER', false);
+if (!defined('USE_COMPOSER'))
+    define('USE_COMPOSER', false);
 
 /**
  * OPTIONAL
@@ -140,7 +152,8 @@ if (!defined('USE_COMPOSER')) define('USE_COMPOSER', false);
  * @var string Composer options
  * @link http://getcomposer.org/doc/03-cli.md#install
  */
-if (!defined('COMPOSER_OPTIONS')) define('COMPOSER_OPTIONS', '--no-dev');
+if (!defined('COMPOSER_OPTIONS'))
+    define('COMPOSER_OPTIONS', '--no-dev');
 
 /**
  * OPTIONAL
@@ -150,7 +163,8 @@ if (!defined('COMPOSER_OPTIONS')) define('COMPOSER_OPTIONS', '--no-dev');
  * @var string Path to the COMPOSER_HOME e.g. `/tmp/composer`
  * @link https://getcomposer.org/doc/03-cli.md#composer-home
  */
-if (!defined('COMPOSER_HOME')) define('COMPOSER_HOME', false);
+if (!defined('COMPOSER_HOME'))
+    define('COMPOSER_HOME', false);
 
 /**
  * OPTIONAL
@@ -159,12 +173,15 @@ if (!defined('COMPOSER_HOME')) define('COMPOSER_HOME', false);
  * @var string A single email address, or comma separated list of email addresses
  *      e.g. 'someone@example.com' or 'someone@example.com, someone-else@example.com, ...'
  */
-if (!defined('EMAIL_ON_ERROR')) define('EMAIL_ON_ERROR', false);
+if (!defined('EMAIL_ON_ERROR'))
+    define('EMAIL_ON_ERROR', false);
 
 // ===========================================[ Configuration end ]===
 
 // If there's authorization error, set the correct HTTP header.
-if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS_TOKEN === 'BetterChangeMeNowOrSufferTheConsequences') {
+if (!isset($_GET['sat']) ||
+    $_GET['sat'] !== SECRET_ACCESS_TOKEN ||
+    SECRET_ACCESS_TOKEN === 'BetterChangeMeNowOrSufferTheConsequences') {
 	header($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden', true, 403);
 }
 ob_start();
